@@ -3,83 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebGL Glass Refraction Demo</title>
+    <title>Liquid Glass Countdown</title>
     <style>
-        body { margin: 0; overflow: hidden; background-color: #333; color: white; font-family: sans-serif; }
-        canvas { display: block; }
-        .controls {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            background: rgba(0,0,0,0.7);
-            padding: 10px;
-            border-radius: 5px;
-            z-index: 10;
-            max-height: 90vh;
-            overflow-y: auto;
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #333;
+            color: white;
+            font-family: sans-serif;
         }
-        .controls label { display: block; margin-bottom: 5px; margin-top:10px; }
-        .controls input[type="range"] { width: 150px; }
-        .controls input[type="file"] { margin-top: 10px; }
-        .controls input[type="checkbox"] { margin-right: 5px; }
+        canvas { 
+            display: block; 
+        }
+        .countdown-glass {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 40px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px) saturate(150%);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            color: #fff;
+            text-align: center;
+            font-size: 2rem;
+            z-index: 5;
+        }
+        .countdown-glass span {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <div class="controls">
-        <label for="imageUpload">Background Image:</label>
-        <input type="file" id="imageUpload" accept="image/*">
+    <canvas id="glCanvas"></canvas>
 
-        <label for="glassWidth">Width: <span id="widthValue">150</span>px</label>
-        <input type="range" id="glassWidth" min="50" max="500" value="150">
-
-        <label for="glassHeight">Height: <span id="heightValue">170</span>px</label>
-        <input type="range" id="glassHeight" min="50" max="500" value="170">
-
-        <label for="cornerRadius">Corner Radius: <span id="radiusValue">32</span>px</label>
-        <input type="range" id="cornerRadius" min="0" max="250" value="32">
-        
-        <label for="ior">IOR (Refraction): <span id="iorValue">1.1</span></label>
-        <input type="range" id="ior" min="0.8" max="1.5" value="1.1" step="0.01">
-
-        <label for="glassThickness">Thickness/Strength: <span id="thicknessValue">41</span></label>
-        <input type="range" id="glassThickness" min="0" max="50" value="41" step="0.1">
-
-        <label for="normalStrength">Normal Strength: <span id="normalStrengthValue">6.4</span></label>
-        <input type="range" id="normalStrength" min="0.1" max="10" value="6.4" step="0.1">
-
-        <label for="displacementScale">Displacement Scale: <span id="displacementScaleValue">1.0</span></label>
-        <input type="range" id="displacementScale" min="0.1" max="5" value="1.0" step="0.1">
-        
-        <label for="heightBlurFactor">Height Transition (px): <span id="heightBlurFactorValue">8.0</span></label>
-        <input type="range" id="heightBlurFactor" min="0.1" max="20" value="8.0" step="0.1">
-
-        <label for="sminSmoothing">SDF Smoothing (k): <span id="sminSmoothingValue">20.0</span></label>
-        <input type="range" id="sminSmoothing" min="0.0" max="20.0" value="20.0" step="0.1">
-
-        <label for="blurRadius">Blur Radius (Frosted): <span id="blurRadiusValue">0.0</span></label>
-        <input type="range" id="blurRadius" min="0.0" max="5.0" value="0.0" step="0.1">
-
-        <label for="highlightWidth">Highlight Width: <span id="highlightWidthValue">3.5</span></label>
-        <input type="range" id="highlightWidth" min="0.0" max="5" value="3.5" step="0.1">
-
-        <div>
-            <input type="checkbox" id="showNormalsCheckbox">
-            <label for="showNormalsCheckbox" style="display: inline;">Show Normals</label>
+    <div class="countdown-glass">
+        <h1>Faltam:</h1>
+        <div id="countdown">
+            <span id="days">00</span> dias 
+            <span id="hours">00</span> horas 
+            <span id="minutes">00</span> minutos 
+            <span id="seconds">00</span> segundos
         </div>
     </div>
 
-        <canvas id="glCanvas"></canvas>
-        <div class="countdown-glass">
-             <h1>Faltam:</h1>
-             <div id="countdown">
-                <span id="days">00</span> dias 
-                <span id="hours">00</span> horas 
-                <span id="minutes">00</span> minutos 
-                <span id="seconds">00</span> segundos
-            </div>
-        </div>
-
-        <script src="app.js"></script>
-        <script src="countdown.js"></script>
+    <script src="app.js"></script>
+    <script src="countdown.js"></script>
 </body>
 </html>
