@@ -7,9 +7,11 @@ body {
   align-items: center;
   height: 100vh;
   background: linear-gradient(135deg, #6a11cb, #2575fc);
+  overflow: hidden;
 }
 
 .glass-container {
+  position: relative;
   padding: 50px;
   border-radius: 25px;
   background: rgba(255, 255, 255, 0.15);
@@ -18,8 +20,33 @@ body {
   color: #fff;
   text-align: center;
   font-size: 2rem;
+  overflow: hidden;
+}
+
+/* Efeito líquido animado */
+.glass-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25), transparent 60%),
+              radial-gradient(circle at 70% 70%, rgba(255,255,255,0.2), transparent 60%);
+  animation: liquidMove 6s infinite linear;
+  filter: blur(20px);
+}
+
+@keyframes liquidMove {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(10px, -10px) rotate(20deg); }
+  50% { transform: translate(-10px, 10px) rotate(-20deg); }
+  75% { transform: translate(10px, 10px) rotate(10deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
 }
 
 #countdown span {
   font-weight: bold;
+  position: relative;
+  z-index: 1; /* Faz os números ficarem acima do efeito líquido */
 }
