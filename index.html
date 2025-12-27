@@ -4,36 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liquid Glass Countdown</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background-color: #333;
-            color: white;
-            font-family: sans-serif;
-        }
-        canvas { 
-            display: block; 
-        }
-        .countdown-glass {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 40px;
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px) saturate(150%);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-            color: #fff;
-            text-align: center;
-            font-size: 2rem;
-            z-index: 5;
-        }
-        .countdown-glass span {
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
     <canvas id="glCanvas"></canvas>
